@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>IBM Finance Dashboard</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+<style>
+
+:root{
+  --bg:#0f1115;
+  --panel:#16181d;
+  --panel-2:#1d2128;
+  --border:#2b2f36;
+
+  --text:#f4f4f4;
+  --muted:#a8adb4;
+
+  --blue:#4589ff;
+  --blue-hover:#5c97ff;
+
+  --green:#24a148;
+  --red:#da1e28;
+  --orange:#ff832b;
+
+  --radius:18px;
+
+  --shadow:
+    0 10px 30px rgba(0,0,0,.35);
+
+  --gradient:
+    linear-gradient(
+      135deg,
+      rgba(69,137,255,.16),
+      rgba(69,137,255,0)
+    );
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html,
+body{
+  height:100%;
+}
+
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at top left, rgba(69,137,255,.10), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(36,161,72,.08), transparent 25%),
+    var(--bg);
+
+  color:var(--text);
+  font-family:'IBM Plex Sans', sans-serif;
+
+  padding:32px;
+}
+
+.container{
+  max-width:1400px;
+  margin:auto;
+}
+
+/* ======================
+   HEADER
+====================== */
+
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  margin-bottom:32px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+
+  color:var(--muted);
+  margin-bottom:8px;
+}
+
+.brand-icon{
+  width:42px;
+  height:42px;
+
+  border-radius:12px;
+
+  background:rgba(69,137,255,.12);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  color:var(--blue);
+}
+
+h1{
+  margin:0;
+  font-size:3rem;
+  font-weight:300;
+  letter-spacing:-1.5px;
+}
+
+.subtitle{
+  color:var(--muted);
+  margin-top:8px;
+}
+
+.header-right{
+  text-align:right;
+}
+
+.date{
+  color:var(--muted);
+  font-size:.95rem;
+}
+
+.profile{
+  margin-top:12px;
+
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:12px;
+}
+
+.avatar{
+  width:44px;
+  height:44px;
+
+  border-radius:50%;
+
+  background:linear-gradient(
+    135deg,
+    var(--blue),
+    #7cc7ff
+  );
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-weight:600;
+}
+
+/* ======================
+   GRID
+====================== */
+
+.grid{
+  display:grid;
+  gap:24px;
+}
+
+.stats{
+  grid-template-columns:repeat(4,1fr);
+  margin-bottom:24px;
+}
+
+.main{
+  grid-template-columns:2fr 1fr;
+  margin-bottom:24px;
+}
+
+.bottom{
+  grid-template-columns:1.3fr .7fr;
+}
+
+@media(max-width:1100px){
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .main,
+  .bottom{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:700px){
+
+  body{
+    padding:18px;
+  }
+
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .header{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:24px;
+  }
+
+  .header-right{
+    text-align:left;
+  }
+
+  .profile{
+    justify-content:flex-start;
+  }
+
+  h1{
+    font-size:2.3rem;
+  }
+}
+
+/* ======================
+   CARDS
+====================== */
+
+.card{
+  background:var(--gradient), var(--panel);
+
+  border:1px solid var(--border);
+
+  border-radius:var(--radius);
+
+  padding:24px;
+
+  box-shadow:var(--shadow);
+
+  position:relative;
+  overflow:hidden;
+
+  transition:
+    transform .25s ease,
+    border-color .25s ease,
+    background .25s ease;
+}
+
+.card:hover{
+  transform:translateY(-4px);
+  border-color:#3d4754;
+}
+
+.glow{
+  position:absolute;
+  width:220px;
+  height:220px;
+
+  border-radius:50%;
+
+  background:rgba(69,137,255,.12);
+
+  filter:blur(60px);
+
+  top:-120px;
+  right:-80px;
+}
+
+/* ======================
+   STATS
+====================== */
+
+.stat-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+}
+
+.label{
+  color:var(--muted);
+  font-size:.9rem;
+}
+
+.stat-icon{
+  width:42px;
+  height:42px;
+
+  border-radius:12px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.blue-bg{
+  background:rgba(69,137,255,.12);
+  color:var(--blue);
+}
+
+.green-bg{
+  background:rgba(36,161,72,.12);
+  color:var(--green);
+}
+
+.red-bg{
+  background:rgba(218,30,40,.12);
+  color:var(--red);
+}
+
+.orange-bg{
+  background:rgba(255,131,43,.12);
+  color:var(--orange);
+}
+
+.value{
+  font-size:2.8rem;
+  margin-top:18px;
+  font-weight:300;
+  letter-spacing:-1px;
+}
+
+.trend{
+  margin-top:14px;
+
+  display:flex;
+  align-items:center;
+  gap:8px;
+
+  font-size:.85rem;
+  color:var(--muted);
+}
+
+.pill{
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:.75rem;
+  font-weight:600;
+}
+
+.up{
+  background:rgba(36,161,72,.12);
+  color:var(--green);
+}
+
+.down{
+  background:rgba(218,30,40,.12);
+  color:var(--red);
+}
+
+/* ======================
+   PANEL TITLE
+====================== */
+
+.panel-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  margin-bottom:22px;
+}
+
+.panel-title h2{
+  margin:0;
+  font-size:1.25rem;
+  font-weight:500;
+}
+
+.meta{
+  color:var(--muted);
+  font-size:.85rem;
+}
+
+/* ======================
+   TABLE
+====================== */
+
+.table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+.table th{
+  text-align:left;
+  color:var(--muted);
+
+  font-size:.8rem;
+  font-weight:500;
+
+  padding-bottom:14px;
+  border-bottom:1px solid var(--border);
+}
+
+.table td{
+  padding:18px 0;
+  border-bottom:1px solid rgba(255,255,255,.04);
+}
+
+.table tr:last-child td{
+  border-bottom:none;
+}
+
+.table tr{
+  transition:background .2s ease;
+}
+
+.table tr:hover{
+  background:rgba(255,255,255,.02);
+}
+
+.tx{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.tx-icon{
+  width:42px;
+  height:42px;
+
+  border-radius:12px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.tx-income{
+  background:rgba(36,161,72,.12);
+  color:var(--green);
+}
+
+.tx-expense{
+  background:rgba(255,255,255,.05);
+  color:#c6c6c6;
+}
+
+.tx-name{
+  font-weight:500;
+}
+
+.tx-sub{
+  font-size:.8rem;
+  color:var(--muted);
+  margin-top:2px;
+}
+
+.amount{
+  text-align:right;
+  font-weight:600;
+}
+
+.pos{
+  color:var(--green);
+}
+
+.neg{
+  color:#f4f4f4;
+}
+
+/* ======================
+   BUDGET
+====================== */
+
+.budget-item{
+  margin-bottom:26px;
+}
+
+.budget-item:last-child{
+  margin-bottom:0;
+}
+
+.budget-head{
+  display:flex;
+  justify-content:space-between;
+
+  margin-bottom:10px;
+}
+
+.budget-name{
+  font-weight:500;
+}
+
+.budget-meta{
+  color:var(--muted);
+  font-size:.85rem;
+}
+
+.track{
+  width:100%;
+  height:8px;
+
+  background:#252932;
+
+  border-radius:999px;
+
+  overflow:hidden;
+}
+
+.bar{
+  height:100%;
+  border-radius:999px;
+}
+
+.b1{
+  width:72%;
+  background:var(--blue);
+}
+
+.b2{
+  width:46%;
+  background:var(--green);
+}
+
+.b3{
+  width:90%;
+  background:var(--red);
+}
+
+.b4{
+  width:35%;
+  background:var(--orange);
+}
+
+/* ======================
+   CHART MOCK
+====================== */
+
+.chart{
+  height:320px;
+
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+
+  gap:12px;
+}
+
+.chart-bar{
+  flex:1;
+
+  background:linear-gradient(
+    to top,
+    rgba(69,137,255,.85),
+    rgba(69,137,255,.2)
+  );
+
+  border-radius:12px 12px 4px 4px;
+
+  position:relative;
+
+  transition:transform .2s ease;
+}
+
+.chart-bar:hover{
+  transform:translateY(-6px);
+}
+
+.chart-bar span{
+  position:absolute;
+  bottom:-28px;
+  left:50%;
+  transform:translateX(-50%);
+
+  color:var(--muted);
+  font-size:.75rem;
+}
+
+/* ======================
+   FORM
+====================== */
+
+.form-grid{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr auto;
+  gap:18px;
+  align-items:end;
+}
+
+@media(max-width:900px){
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.field label{
+  font-size:.85rem;
+  color:var(--muted);
+}
+
+.input,
+.select{
+  width:100%;
+
+  background:var(--panel-2);
+
+  border:1px solid var(--border);
+
+  color:var(--text);
+
+  border-radius:12px;
+
+  padding:14px 16px;
+
+  font-family:inherit;
+  font-size:.95rem;
+
+  transition:
+    border-color .2s ease,
+    background .2s ease,
+    box-shadow .2s ease;
+}
+
+.input:focus,
+.select:focus{
+  outline:none;
+
+  border-color:var(--blue);
+
+  box-shadow:0 0 0 3px rgba(69,137,255,.15);
+}
+
+.btn{
+  height:50px;
+
+  border:none;
+
+  border-radius:14px;
+
+  background:var(--blue);
+
+  color:white;
+
+  padding:0 22px;
+
+  font-size:.95rem;
+  font-weight:600;
+
+  cursor:pointer;
+
+  transition:
+    background .2s ease,
+    transform .2s ease,
+    box-shadow .2s ease;
+
+  box-shadow:
+    0 8px 24px rgba(69,137,255,.25);
+}
+
+.btn:hover{
+  background:var(--blue-hover);
+  transform:translateY(-2px);
+}
+
+/* ======================
+   TOAST
+====================== */
+
+.toast{
+  position:fixed;
+  bottom:28px;
+  left:50%;
+
+  transform:translateX(-50%) translateY(20px);
+
+  background:#262b33;
+
+  border:1px solid #343a45;
+
+  color:#fff;
+
+  padding:14px 20px;
+
+  border-radius:14px;
+
+  opacity:0;
+
+  transition:all .3s ease;
+
+  pointer-events:none;
+
+  box-shadow:var(--shadow);
+}
+
+.toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <header class="header">
+
+    <div>
+      <div class="brand">
+        <div class="brand-icon">
+          <span class="material-symbols-outlined">
+            monitoring
+          </span>
+        </div>
+
+        <span>IBM Finance Analytics</span>
+      </div>
+
+      <h1>Personal Finance</h1>
+
+      <div class="subtitle">
+        Track spending, savings, and financial performance in real time.
+      </div>
+    </div>
+
+    <div class="header-right">
+
+      <div class="date" id="date"></div>
+
+      <div class="profile">
+        <div>
+          <div style="font-weight:600;">Mariano Perez</div>
+          <div class="meta">Premium Account</div>
+        </div>
+
+        <div class="avatar">
+          MP
+        </div>
+      </div>
+
+    </div>
+
+  </header>
+
+  <!-- STATS -->
+
+  <section class="grid stats">
+
+    <div class="card">
+
+      <div class="glow"></div>
+
+      <div class="stat-top">
+
+        <div>
+          <div class="label">Total Balance</div>
+          <div class="value" id="balance">$8,450</div>
+        </div>
+
+        <div class="stat-icon blue-bg">
+          <span class="material-symbols-outlined">
+            account_balance_wallet
+          </span>
+        </div>
+
+      </div>
+
+      <div class="trend">
+        <span class="pill up">+12.4%</span>
+        vs last month
+      </div>
+
+    </div>
+
+    <div class="card">
+
+      <div class="stat-top">
+
+        <div>
+          <div class="label">Income</div>
+          <div class="value pos" id="income">$5,200</div>
+        </div>
+
+        <div class="stat-icon green-bg">
+          <span class="material-symbols-outlined">
+            trending_up
+          </span>
+        </div>
+
+      </div>
+
+      <div class="trend">
+        4 deposits this month
+      </div>
+
+    </div>
+
+    <div class="card">
+
+      <div class="stat-top">
+
+        <div>
+          <div class="label">Expenses</div>
+          <div class="value neg" id="expenses">$2,100</div>
+        </div>
+
+        <div class="stat-icon red-bg">
+          <span class="material-symbols-outlined">
+            payments
+          </span>
+        </div>
+
+      </div>
+
+      <div class="trend">
+        <span class="pill down">-3.2%</span>
+        lower than April
+      </div>
+
+    </div>
+
+    <div class="card">
+
+      <div class="stat-top">
+
+        <div>
+          <div class="label">Investments</div>
+          <div class="value" id="savings">$3,100</div>
+        </div>
+
+        <div class="stat-icon orange-bg">
+          <span class="material-symbols-outlined">
+            insights
+          </span>
+        </div>
+
+      </div>
+
+      <div class="trend">
+        Portfolio allocation updated
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- MAIN -->
+
+  <section class="grid main">
+
+    <!-- TRANSACTIONS -->
+
+    <div class="card">
+
+      <div class="panel-title">
+        <h2>Recent Transactions</h2>
+        <span class="meta">Last 7 Days</span>
+      </div>
+
+      <table class="table">
+
+        <thead>
+          <tr>
+            <th>Transaction</th>
+            <th>Date</th>
+            <th style="text-align:right;">Amount</th>
+          </tr>
+        </thead>
+
+        <tbody id="transaction-list">
+
+          <tr>
+            <td>
+
+              <div class="tx">
+
+                <div class="tx-icon tx-income">
+                  <span class="material-symbols-outlined">
+                    south
+                  </span>
+                </div>
+
+                <div>
+                  <div class="tx-name">
+                    Salary Deposit
+                  </div>
+
+                  <div class="tx-sub">
+                    Employer Payroll
+                  </div>
+                </div>
+
+              </div>
+
+            </td>
+
+            <td>May 15</td>
+
+            <td class="amount pos">
+              +$4,000
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td>
+
+              <div class="tx">
+
+                <div class="tx-icon tx-expense">
+                  <span class="material-symbols-outlined">
+                    north
+                  </span>
+                </div>
+
+                <div>
+                  <div class="tx-name">
+                    Groceries
+                  </div>
+
+                  <div class="tx-sub">
+                    Whole Foods
+                  </div>
+                </div>
+
+              </div>
+
+            </td>
+
+            <td>May 16</td>
+
+            <td class="amount neg">
+              -$120
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td>
+
+              <div class="tx">
+
+                <div class="tx-icon tx-expense">
+                  <span class="material-symbols-outlined">
+                    north
+                  </span>
+                </div>
+
+                <div>
+                  <div class="tx-name">
+                    Utilities
+                  </div>
+
+                  <div class="tx-sub">
+                    Electricity & Water
+                  </div>
+                </div>
+
+              </div>
+
+            </td>
+
+            <td>May 17</td>
+
+            <td class="amount neg">
+              -$240
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <!-- BUDGET -->
+
+    <div class="card">
+
+      <div class="panel-title">
+        <h2>Budget Usage</h2>
+        <span class="meta">May 2026</span>
+      </div>
+
+      <div class="budget-item">
+
+        <div class="budget-head">
+          <div class="budget-name">Food</div>
+          <div class="budget-meta">$360 / $500</div>
+        </div>
+
+        <div class="track">
+          <div class="bar b1"></div>
+        </div>
+
+      </div>
+
+      <div class="budget-item">
+
+        <div class="budget-head">
+          <div class="budget-name">Shopping</div>
+          <div class="budget-meta">$184 / $400</div>
+        </div>
+
+        <div class="track">
+          <div class="bar b2"></div>
+        </div>
+
+      </div>
+
+      <div class="budget-item">
+
+        <div class="budget-head">
+          <div class="budget-name">Bills</div>
+          <div class="budget-meta">$540 / $600</div>
+        </div>
+
+        <div class="track">
+          <div class="bar b3"></div>
+        </div>
+
+      </div>
+
+      <div class="budget-item">
+
+        <div class="budget-head">
+          <div class="budget-name">Entertainment</div>
+          <div class="budget-meta">$95 / $300</div>
+        </div>
+
+        <div class="track">
+          <div class="bar b4"></div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- BOTTOM -->
+
+  <section class="grid bottom">
+
+    <!-- CHART -->
+
+    <div class="card">
+
+      <div class="panel-title">
+        <h2>Cash Flow Overview</h2>
+        <span class="meta">Monthly Revenue</span>
+      </div>
+
+      <div class="chart">
+
+        <div class="chart-bar" style="height:55%;">
+          <span>Jan</span>
+        </div>
+
+        <div class="chart-bar" style="height:68%;">
+          <span>Feb</span>
+        </div>
+
+        <div class="chart-bar" style="height:48%;">
+          <span>Mar</span>
+        </div>
+
+        <div class="chart-bar" style="height:82%;">
+          <span>Apr</span>
+        </div>
+
+        <div class="chart-bar" style="height:74%;">
+          <span>May</span>
+        </div>
+
+        <div class="chart-bar" style="height:92%;">
+          <span>Jun</span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- FORM -->
+
+    <div class="card">
+
+      <div class="panel-title">
+        <h2>Add Transaction</h2>
+      </div>
+
+      <div class="form-grid">
+
+        <div class="field">
+          <label>Description</label>
+
+          <input
+            id="description"
+            class="input"
+            type="text"
+            placeholder="Transaction name"
+          >
+        </div>
+
+        <div class="field">
+          <label>Amount</label>
+
+          <input
+            id="amount"
+            class="input"
+            type="number"
+            placeholder="0.00"
+          >
+        </div>
+
+        <div class="field">
+          <label>Type</label>
+
+          <select id="type" class="select">
+            <option value="income">Income</option>
+            <option value="expense">Expense</option>
+          </select>
+        </div>
+
+        <button class="btn" onclick="addTransaction()">
+          Add
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+
+document.getElementById("date").innerText =
+  new Date().toLocaleDateString(
+    "en-US",
+    {
+      weekday:"long",
+      year:"numeric",
+      month:"long",
+      day:"numeric"
+    }
+  );
+
+let balance = 8450;
+let income = 5200;
+let expenses = 2100;
+let savings = 3100;
+
+const fmt = n =>
+  `$${Math.round(n).toLocaleString()}`;
+
+function updateDashboard(){
+
+  document.getElementById("balance").innerText =
+    fmt(balance);
+
+  document.getElementById("income").innerText =
+    fmt(income);
+
+  document.getElementById("expenses").innerText =
+    fmt(expenses);
+
+  document.getElementById("savings").innerText =
+    fmt(savings);
+}
+
+function toast(msg){
+
+  const t =
+    document.getElementById("toast");
+
+  t.innerText = msg;
+
+  t.classList.add("show");
+
+  clearTimeout(t.timer);
+
+  t.timer = setTimeout(()=>{
+    t.classList.remove("show");
+  },3000);
+}
+
+function addTransaction(){
+
+  const desc =
+    document.getElementById("description")
+    .value.trim();
+
+  const amount =
+    parseFloat(
+      document.getElementById("amount").value
+    );
+
+  const type =
+    document.getElementById("type").value;
+
+  if(!desc || !amount || amount <= 0){
+    toast("Enter a valid transaction.");
+    return;
+  }
+
+  const list =
+    document.getElementById("transaction-list");
+
+  const row =
+    document.createElement("tr");
+
+  const date =
+    new Date().toLocaleDateString(
+      "en-US",
+      {
+        month:"short",
+        day:"numeric"
+      }
+    );
+
+  if(type === "income"){
+
+    income += amount;
+    balance += amount;
+    savings += amount * .2;
+
+    row.innerHTML = `
+      <td>
+        <div class="tx">
+
+          <div class="tx-icon tx-income">
+            <span class="material-symbols-outlined">
+              south
+            </span>
+          </div>
+
+          <div>
+            <div class="tx-name">${desc}</div>
+            <div class="tx-sub">Income Added</div>
+          </div>
+
+        </div>
+      </td>
+
+      <td>${date}</td>
+
+      <td class="amount pos">
+        +$${amount.toLocaleString()}
+      </td>
+    `;
+
+  }else{
+
+    expenses += amount;
+    balance -= amount;
+
+    row.innerHTML = `
+      <td>
+        <div class="tx">
+
+          <div class="tx-icon tx-expense">
+            <span class="material-symbols-outlined">
+              north
+            </span>
+          </div>
+
+          <div>
+            <div class="tx-name">${desc}</div>
+            <div class="tx-sub">Expense Added</div>
+          </div>
+
+        </div>
+      </td>
+
+      <td>${date}</td>
+
+      <td class="amount neg">
+        -$${amount.toLocaleString()}
+      </td>
+    `;
+  }
+
+  list.prepend(row);
+
+  updateDashboard();
+
+  toast(`${desc} added successfully`);
+
+  document.getElementById("description").value = "";
+  document.getElementById("amount").value = "";
+}
+
+</script>
+
+</body>
+</html>
